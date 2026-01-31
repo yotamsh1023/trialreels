@@ -66,7 +66,7 @@ export default function Landing() {
     { title: 'חיבור אינסטגרם', desc: 'חבר פעם אחת ומשם המערכת עובדת בשבילך.', highlight: true, icon: 'instagram' },
     { title: 'בחירת רילסים', desc: 'בחר אילו רילסים להעלות. השאר אוטומטי.', highlight: false, icon: 'video' },
     { title: 'העלאה אוטומטית', desc: 'כל יום Trial Reels חדשים בלי שתעשה כלום.', highlight: false, icon: 'lightning' },
-    { title: 'יותר חשיפה', desc: 'האלגוריתם אוהב תנועה. יותר רילסים = יותר הזדמנויות.', highlight: false, icon: 'target' },
+    { title: 'יותר חשיפה', desc: <>האלגוריתם אוהב תנועה.<br />יותר רילסים = יותר הזדמנויות.</>, highlight: false, icon: 'target' },
   ]
 
   return (
@@ -76,7 +76,7 @@ export default function Landing() {
         <div className="landing-header-inner">
           <Link to="/" className="landing-logo">
             <span className="landing-logo-icon" aria-hidden>TR</span>
-            <span className="landing-logo-text">Trial Reels</span>
+            <span className="landing-logo-text">Trial Flow</span>
           </Link>
           <nav className="landing-nav">
             <Link to="/login" className="landing-nav-link">כניסה</Link>
@@ -182,7 +182,7 @@ export default function Landing() {
           </span>
           <h2 className="landing-section-title landing-section-title-dark">האלגוריתם אוהב תנועה. לא מושלמות.</h2>
           <p className="landing-section-lead landing-section-lead-dark">
-            Trial Reels הם הדרך של אינסטגרם לבדוק תוכן מול קהלים חדשים. <br></br>ככל שיש לך יותר רילסים שרצים - יש יותר הזדמנויות להתפוצץ.
+            Trial Flow הם הדרך של אינסטגרם לבדוק תוכן מול קהלים חדשים. <br></br>ככל שיש לך יותר רילסים שרצים - יש יותר הזדמנויות להתפוצץ.
           </p>
           <div className="landing-compare">
             <div className="landing-compare-box">
@@ -275,15 +275,9 @@ export default function Landing() {
 
       <footer className="landing-footer landing-footer-dark">
         <div className="landing-container">
-          <div className="landing-footer-owner">
-            <p className="landing-footer-owner-title">פרטי בעל האתר ובעל השליטה במאגר המידע</p>
-            <p className="landing-footer-owner-line">שם: יותם שממה</p>
-            <p className="landing-footer-owner-line">דוא״ל: <a href="mailto:yotam30086@gmail.com">yotam30086@gmail.com</a></p>
-            <p className="landing-footer-owner-line">טלפון: <a href="tel:0535298158">053-529-8158</a></p>
-            <p className="landing-footer-owner-line">כתובת אתר: ___</p>
-          </div>
+  
           <p className="landing-footer-text landing-footer-text-dark">
-            Trial Reels · מנוע הפצה אוטומטי לרילסים שלך
+            Trial Flow · מנוע הפצה אוטומטי לרילסים שלך
             {' · '}
             <Link to="/privacy" className="landing-footer-link">מדיניות ופרטיות</Link>
             {' · '}

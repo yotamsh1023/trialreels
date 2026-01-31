@@ -9,7 +9,7 @@ export default function Accessibility() {
 
         <section className="privacy-section privacy-intro">
           <p>
-            Trial Reels שואפת להנגיש את השירות לכלל המשתמשים, כולל אנשים עם מוגבלויות.
+            Trial Flow שואפת להנגיש את השירות לכלל המשתמשים, כולל אנשים עם מוגבלויות.
             דף זה מתאר את יישום תקן ישראלי 5568 לנגישות תכנים באינטרנט (המבוסס על WCAG 2.1 Level AA),
             ואת האמצעים שבהם נקטנו כדי לשפר את חוויית הגלישה.
           </p>

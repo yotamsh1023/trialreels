@@ -81,7 +81,7 @@ function extractThumbnailFromItem(item) {
   return getFirstImageUrlFromObject(item)
 }
 
-/** True if Analytics item is a video/reel (Trial Reels only support video) */
+/** True if Analytics item is a video/reel (Trial Flow only support video) */
 function isAnalyticsVideoReel(item) {
   if (!item || typeof item !== 'object') return false
   const mt = (item.mediaType ?? item.media_type ?? item.type ?? '').toString().toLowerCase()
@@ -102,7 +102,7 @@ function mapAnalyticsItemToPost(item) {
   return { id: String(id), caption: String(caption), postedAt, thumbnail: thumbnail || '', platformPostUrl }
 }
 
-/** True if GetLate Posts API item is a video/reel (Trial Reels only support video) */
+/** True if GetLate Posts API item is a video/reel (Trial Flow only support video) */
 function isPostsApiVideoReel(item) {
   if (!item || typeof item !== 'object') return false
   const contentType = item.platformSpecificData?.contentType ?? item.contentType ?? ''

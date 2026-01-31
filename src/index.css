@@ -266,7 +266,8 @@ a:focus-visible {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .landing-hero-right { order: -1; }
+  .landing-hero-left { order: -1; }
+  .landing-hero-right { order: 0; }
 }
 
 .landing-hero-badge {

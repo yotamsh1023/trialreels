@@ -1,6 +1,6 @@
 # Reels AutoPoster
 
-אפליקציה להעלאת רילס אוטומטית ל-Trial Reels מדי יום, באמצעות GetLate API ו-Supabase.
+אפליקציה להעלאת רילס אוטומטית ל-Trial Flow מדי יום, באמצעות GetLate API ו-Supabase.
 
 ## דפים
 

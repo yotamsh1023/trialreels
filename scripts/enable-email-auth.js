@@ -1,5 +1,5 @@
 /**
- * Enables Email auth provider for the trial reels Supabase project via Management API.
+ * Enables Email auth provider for the trial flow Supabase project via Management API.
  * Requires: SUPABASE_ACCESS_TOKEN in .env (get from https://supabase.com/dashboard/account/tokens)
  * Run: node scripts/enable-email-auth.js
  */
