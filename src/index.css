@@ -249,6 +249,47 @@ a:focus-visible {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  overflow: hidden;
+}
+
+.landing-hero-bg-dark::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(59, 130, 246, 0.07) 45%,
+    rgba(96, 165, 250, 0.12) 50%,
+    rgba(59, 130, 246, 0.07) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 80% 80%;
+  animation: landing-hero-flow 12s ease-in-out infinite;
+}
+
+.landing-hero-bg-dark::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    255deg,
+    transparent 0%,
+    rgba(147, 197, 253, 0.05) 40%,
+    transparent 50%,
+    rgba(59, 130, 246, 0.06) 60%,
+    transparent 100%
+  );
+  background-size: 60% 60%;
+  animation: landing-hero-flow 16s ease-in-out infinite reverse;
+  animation-delay: -4s;
+}
+
+@keyframes landing-hero-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .landing-hero-inner-dark {
@@ -419,6 +460,23 @@ a:focus-visible {
 
 @keyframes landing-chart-draw {
   to { stroke-dashoffset: 0; }
+}
+
+/* Chart moves continuously: draw → hold → reset → repeat */
+@keyframes landing-chart-draw-loop {
+  0% { stroke-dashoffset: 400; }
+  35% { stroke-dashoffset: 0; }
+  45% { stroke-dashoffset: 0; }
+  85% { stroke-dashoffset: 400; }
+  100% { stroke-dashoffset: 400; }
+}
+
+.landing-chart-line-loop {
+  animation: landing-chart-draw-loop 5s ease-in-out infinite;
+}
+
+.landing-chart-line-alt.landing-chart-line-loop {
+  animation-delay: 0.4s;
 }
 
 .landing-chart-label {
@@ -689,8 +747,8 @@ a:focus-visible {
   text-align: center;
 }
 .landing-notice-dark {
-  border-color: rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(254, 202, 202, 0.25);
 }
 .landing-notice-text {
   margin: 0;
@@ -698,7 +756,107 @@ a:focus-visible {
   line-height: 1.6;
 }
 .landing-notice-text + .landing-notice-text { margin-top: 0.5rem; }
-.landing-notice-dark .landing-notice-text { color: var(--lp-text-muted); }
+.landing-notice-dark .landing-notice-text { color: #ffffff; }
+
+/* Pricing section */
+.landing-pricing-subtitle {
+  font-size: 1.1rem;
+  color: var(--lp-text-muted);
+  margin: 0 0 1.5rem;
+  font-weight: 500;
+}
+
+.landing-pricing-card {
+  position: relative;
+  padding: 2rem 1.75rem;
+  border-radius: var(--lp-radius);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 24px rgba(59, 130, 246, 0.08);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  direction: rtl;
+  text-align: right;
+}
+
+.landing-pricing-card-dark:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 6px 32px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 32px rgba(59, 130, 246, 0.12);
+}
+
+.landing-pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--lp-accent), var(--lp-accent-soft), transparent);
+  opacity: 0.85;
+  border-radius: var(--lp-radius) var(--lp-radius) 0 0;
+  pointer-events: none;
+}
+
+.landing-pricing-tagline {
+  font-size: 1rem;
+  color: var(--lp-text-muted);
+  margin: 0 0 0.35rem;
+  line-height: 1.5;
+}
+
+.landing-pricing-price {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--lp-text);
+  margin: 1.5rem 0 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.landing-pricing-period {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--lp-text-muted);
+}
+
+.landing-pricing-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  text-align: right;
+}
+
+.landing-pricing-list li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+  color: var(--lp-text);
+  line-height: 1.4;
+}
+
+.landing-pricing-list li::before {
+  content: '✔';
+  flex-shrink: 0;
+  order: -1;
+  color: var(--lp-accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.landing-pricing-cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
 
 .landing-steps {
   display: grid;
@@ -1715,7 +1873,8 @@ body {
     transition-duration: 0.01ms !important;
   }
   .landing-chart-line,
-  .landing-chart-line-alt {
+  .landing-chart-line-alt,
+  .landing-chart-line-loop {
     animation: none !important;
     stroke-dashoffset: 0;
   }

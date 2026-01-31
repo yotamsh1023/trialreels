@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const iconSize = { width: 22, height: 22 }
@@ -40,16 +41,49 @@ function TargetIcon() {
   )
 }
 
-/* Smooth upward trend — "things are improving" */
+/* Smooth upward trend — draws, holds, resets, repeats */
 function LiveChart() {
   const pathPrimary = 'M 0 60 Q 25 55 50 45 T 100 30 T 150 22 T 200 18 T 250 12 T 280 8'
   const pathSecondary = 'M 0 55 Q 30 50 60 42 T 120 32 T 180 28 T 240 22 T 280 18'
   return (
-    <svg className="landing-chart-svg" viewBox="0 0 280 80" preserveAspectRatio="none">
-      <path className="landing-chart-line landing-chart-line-alt" d={pathSecondary} style={{ strokeDasharray: 400, strokeDashoffset: 400, animation: 'landing-chart-draw 2s ease-out forwards' }} />
-      <path className="landing-chart-line" d={pathPrimary} style={{ strokeDasharray: 400, strokeDashoffset: 400, animation: 'landing-chart-draw 1.8s ease-out 0.2s forwards' }} />
+    <svg className="landing-chart-svg" viewBox="0 0 280 80" preserveAspectRatio="none" aria-hidden="true">
+      <path className="landing-chart-line landing-chart-line-alt landing-chart-line-loop" d={pathSecondary} style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
+      <path className="landing-chart-line landing-chart-line-loop" d={pathPrimary} style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
     </svg>
   )
+}
+
+/* Count-up from 0 to target when in view */
+function CountUpStat({ target = 77, duration = 1800, suffix = '%' }) {
+  const [value, setValue] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true)
+          const start = performance.now()
+          const step = (now) => {
+            const elapsed = now - start
+            const progress = Math.min(elapsed / duration, 1)
+            const eased = 1 - (1 - progress) ** 2
+            setValue(Math.floor(eased * target))
+            if (progress < 1) requestAnimationFrame(step)
+          }
+          requestAnimationFrame(step)
+        }
+      },
+      { threshold: 0.3, rootMargin: '0px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [target, duration, hasAnimated])
+
+  return <span ref={ref}>{value}{suffix}</span>
 }
 
 function FeatureIcon({ name }) {
@@ -130,7 +164,7 @@ export default function Landing() {
                 <LiveChart />
               </div>
               <div className="landing-panel landing-panel-stat">
-                <p className="landing-stat-big">77%</p>
+                <p className="landing-stat-big"><CountUpStat target={77} duration={1800} /></p>
                 <p className="landing-stat-desc">חשיפה מבוססת רילסים</p>
               </div>
             </div>
@@ -242,6 +276,34 @@ export default function Landing() {
             במקום לשאול כל יום "מה אני אעלה היום?"<br></br> אתה יודע שהדברים שכבר עשית - עובדים בשבילך.
           </p>
           <p className="landing-feel-tagline landing-feel-tagline-dark">יותר שקט. יותר חשיפה. אותו תוכן.</p>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="landing-section landing-section-dark landing-section-alt-dark" aria-labelledby="pricing-heading">
+        <div className="landing-container landing-container-narrow">
+          <span className="landing-section-badge landing-section-badge-dark">
+            <span className="landing-section-badge-dot" aria-hidden />
+            מחירים
+          </span>
+          <h2 id="pricing-heading" className="landing-section-title landing-section-title-dark">פשוט, בלי התחכמויות</h2>
+          <p className="landing-pricing-subtitle">תן למערכת לעבוד בשבילך</p>
+          <div className="landing-pricing-card landing-pricing-card-dark" dir="rtl">
+            <p className="landing-pricing-tagline">לא עוד כלי.</p>
+            <p className="landing-pricing-tagline">לא עוד משימות.</p>
+            <p className="landing-pricing-tagline">פשוט חיבור אחד ואנחנו כבר דואגים להכל.</p>
+            <p className="landing-pricing-price">₪89 <span className="landing-pricing-period">/ לחודש</span></p>
+            <ul className="landing-pricing-list">
+              <li>חיבור חשבון אינסטגרם אחד</li>
+              <li>בחירת כל הרילסים הקיימים שלך</li>
+              <li>העלאה אוטומטית ל-Trial Reels</li>
+              <li>לופ מחזורי חכם - כל רילס שסימנתם יעלה בסופו של דבר</li>
+              <li>אין צורך לגעת בזה אחרי ההגדרה</li>
+              <li>אפשר להוסיף / להוציא רילסים בכל רגע</li>
+              <li>ביטול בכל עת</li>
+            </ul>
+            <Link to="/signup" className="landing-cta-btn landing-cta-btn-large landing-pricing-cta">התחל עכשיו</Link>
+          </div>
         </div>
       </section>
 
