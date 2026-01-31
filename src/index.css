@@ -565,12 +565,14 @@ a:focus-visible {
   .landing-feature-cell:nth-last-child(-n+2) { border-bottom: none; }
 }
 
-/* Mobile slider: one card width, snap */
+/* Mobile slider: one full card at a time, one swipe = next card, then page scroll */
 @media (max-width: 768px) {
   .landing-feature-cell {
     flex: 0 0 auto;
-    min-width: 85%;
-    max-width: 85%;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -581,8 +583,9 @@ a:focus-visible {
 
 @media (max-width: 480px) {
   .landing-feature-cell {
-    min-width: 82%;
-    max-width: 82%;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
     border-right: 1px solid rgba(255, 255, 255, 0.06);
     border-bottom: none;
   }
